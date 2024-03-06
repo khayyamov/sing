@@ -2,6 +2,10 @@
 
 package json
 
+import (
+	"github.com/sagernet/sing/common/json/internal/contextjson_120"
+)
+
 var (
 	Marshal    = json.Marshal
 	Unmarshal  = json.Unmarshal
