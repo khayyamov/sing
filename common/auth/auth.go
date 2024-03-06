@@ -24,6 +24,14 @@ func NewAuthenticator(users []User) *Authenticator {
 	return au
 }
 
+func (au *Authenticator) AddUserToAuthenticator(users []User) {
+	if len(users) > 0 {
+		for _, user := range users {
+			au.userMap[user.Username] = append(au.userMap[user.Username], user.Password)
+		}
+	}
+}
+
 func (au *Authenticator) Verify(username string, password string) bool {
 	passwordList, ok := au.userMap[username]
 	return ok && common.Contains(passwordList, password)
