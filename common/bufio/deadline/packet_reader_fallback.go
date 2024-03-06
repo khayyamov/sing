@@ -5,9 +5,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/khayyamov/sing/common/atomic"
-	"github.com/khayyamov/sing/common/buf"
-	M "github.com/khayyamov/sing/common/metadata"
+	"github.com/sagernet/sing/common/atomic"
+	"github.com/sagernet/sing/common/buf"
+	M "github.com/sagernet/sing/common/metadata"
 )
 
 type fallbackPacketReader struct {

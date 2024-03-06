@@ -5,7 +5,7 @@ import (
 	"os/exec"
 	"strings"
 
-	E "github.com/khayyamov/sing/common/exceptions"
+	E "github.com/sagernet/sing/common/exceptions"
 )
 
 type Shell struct {

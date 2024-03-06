@@ -3,7 +3,7 @@ package format
 import (
 	"strconv"
 
-	"github.com/khayyamov/sing/common"
+	"github.com/sagernet/sing/common"
 )
 
 type Stringer interface {

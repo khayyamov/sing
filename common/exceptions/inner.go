@@ -1,6 +1,6 @@
 package exceptions
 
-import "github.com/khayyamov/sing/common"
+import "github.com/sagernet/sing/common"
 
 type HasInnerError interface {
 	Unwrap() error

@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/khayyamov/sing/common"
-	E "github.com/khayyamov/sing/common/exceptions"
-	"github.com/khayyamov/sing/common/json"
-	"github.com/khayyamov/sing/common/x/collections"
-	"github.com/khayyamov/sing/common/x/linkedhashmap"
+	"github.com/sagernet/sing/common"
+	E "github.com/sagernet/sing/common/exceptions"
+	"github.com/sagernet/sing/common/json"
+	"github.com/sagernet/sing/common/x/collections"
+	"github.com/sagernet/sing/common/x/linkedhashmap"
 )
 
 type JSONObject struct {

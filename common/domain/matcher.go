@@ -6,7 +6,7 @@ import (
 	"sort"
 	"unicode/utf8"
 
-	"github.com/khayyamov/sing/common/rw"
+	"github.com/sagernet/sing/common/rw"
 )
 
 type Matcher struct {

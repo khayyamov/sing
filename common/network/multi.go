@@ -6,9 +6,9 @@ import (
 	"net/netip"
 	"time"
 
-	"github.com/khayyamov/sing/common"
-	E "github.com/khayyamov/sing/common/exceptions"
-	M "github.com/khayyamov/sing/common/metadata"
+	"github.com/sagernet/sing/common"
+	E "github.com/sagernet/sing/common/exceptions"
+	M "github.com/sagernet/sing/common/metadata"
 )
 
 const DefaultFallbackDelay = 300 * time.Millisecond

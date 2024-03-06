@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	M "github.com/khayyamov/sing/common/metadata"
-	"github.com/khayyamov/sing/common/task"
+	M "github.com/sagernet/sing/common/metadata"
+	"github.com/sagernet/sing/common/task"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

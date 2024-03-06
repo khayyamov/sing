@@ -4,10 +4,10 @@ import (
 	"net"
 	"sync"
 
-	"github.com/khayyamov/sing/common/buf"
-	"github.com/khayyamov/sing/common/debug"
-	M "github.com/khayyamov/sing/common/metadata"
-	N "github.com/khayyamov/sing/common/network"
+	"github.com/sagernet/sing/common/buf"
+	"github.com/sagernet/sing/common/debug"
+	M "github.com/sagernet/sing/common/metadata"
+	N "github.com/sagernet/sing/common/network"
 )
 
 type SerialConn struct {

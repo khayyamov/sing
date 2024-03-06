@@ -4,9 +4,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/khayyamov/sing/common/buf"
-	"github.com/khayyamov/sing/common/bufio"
-	N "github.com/khayyamov/sing/common/network"
+	"github.com/sagernet/sing/common/buf"
+	"github.com/sagernet/sing/common/bufio"
+	N "github.com/sagernet/sing/common/network"
 )
 
 type Conn struct {

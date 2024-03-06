@@ -1,6 +1,6 @@
 package pause
 
-import "github.com/khayyamov/sing/common/x/list"
+import "github.com/sagernet/sing/common/x/list"
 
 type Manager interface {
 	DevicePause()

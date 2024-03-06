@@ -4,7 +4,7 @@ import (
 	"context"
 	"os"
 
-	"github.com/khayyamov/sing/service"
+	"github.com/sagernet/sing/service"
 )
 
 type Manager interface {

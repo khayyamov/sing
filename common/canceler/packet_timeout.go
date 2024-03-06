@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	"github.com/khayyamov/sing/common"
-	"github.com/khayyamov/sing/common/buf"
-	E "github.com/khayyamov/sing/common/exceptions"
-	M "github.com/khayyamov/sing/common/metadata"
-	N "github.com/khayyamov/sing/common/network"
+	"github.com/sagernet/sing/common"
+	"github.com/sagernet/sing/common/buf"
+	E "github.com/sagernet/sing/common/exceptions"
+	M "github.com/sagernet/sing/common/metadata"
+	N "github.com/sagernet/sing/common/network"
 )
 
 type TimeoutPacketConn struct {

@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/khayyamov/sing/common"
+	"github.com/sagernet/sing/common"
 )
 
 func FileExists(path string) bool {

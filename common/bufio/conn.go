@@ -4,10 +4,10 @@ import (
 	"io"
 	"net"
 
-	"github.com/khayyamov/sing/common"
-	"github.com/khayyamov/sing/common/buf"
-	M "github.com/khayyamov/sing/common/metadata"
-	N "github.com/khayyamov/sing/common/network"
+	"github.com/sagernet/sing/common"
+	"github.com/sagernet/sing/common/buf"
+	M "github.com/sagernet/sing/common/metadata"
+	N "github.com/sagernet/sing/common/network"
 )
 
 func NewPacketConn(conn net.PacketConn) N.NetPacketConn {

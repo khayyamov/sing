@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/khayyamov/sing/common"
+	"github.com/sagernet/sing/common"
 )
 
 type Instance struct {

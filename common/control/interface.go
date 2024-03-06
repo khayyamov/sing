@@ -3,7 +3,7 @@ package control
 import (
 	"syscall"
 
-	E "github.com/khayyamov/sing/common/exceptions"
+	E "github.com/sagernet/sing/common/exceptions"
 )
 
 type Func = func(network, address string, conn syscall.RawConn) error

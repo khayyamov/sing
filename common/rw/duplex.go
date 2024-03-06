@@ -1,7 +1,7 @@
 package rw
 
 import (
-	"github.com/khayyamov/sing/common"
+	"github.com/sagernet/sing/common"
 )
 
 type ReadCloser interface {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/khayyamov/sing/common"
-	E "github.com/khayyamov/sing/common/exceptions"
+	"github.com/sagernet/sing/common"
+	E "github.com/sagernet/sing/common/exceptions"
 )
 
 type taskItem struct {

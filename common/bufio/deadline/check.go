@@ -1,8 +1,8 @@
 package deadline
 
 import (
-	"github.com/khayyamov/sing/common"
-	N "github.com/khayyamov/sing/common/network"
+	"github.com/sagernet/sing/common"
+	N "github.com/sagernet/sing/common/network"
 )
 
 type WithoutReadDeadline interface {

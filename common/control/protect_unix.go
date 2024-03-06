@@ -5,7 +5,7 @@ package control
 import (
 	"syscall"
 
-	E "github.com/khayyamov/sing/common/exceptions"
+	E "github.com/sagernet/sing/common/exceptions"
 )
 
 func sendAncillaryFileDescriptors(protectPath string, fileDescriptors []int) error {

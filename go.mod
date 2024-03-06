@@ -1,4 +1,4 @@
-module github.com/khayyamov/sing
+module github.com/sagernet/sing
 
 go 1.18
 

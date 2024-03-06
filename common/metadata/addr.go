@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"unsafe"
 
-	"github.com/khayyamov/sing/common/debug"
+	"github.com/sagernet/sing/common/debug"
 )
 
 type Socksaddr struct {

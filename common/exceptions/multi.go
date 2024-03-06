@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/khayyamov/sing/common"
-	F "github.com/khayyamov/sing/common/format"
+	"github.com/sagernet/sing/common"
+	F "github.com/sagernet/sing/common/format"
 )
 
 type multiError struct {

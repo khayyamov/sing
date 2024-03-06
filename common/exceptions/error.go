@@ -9,7 +9,7 @@ import (
 	"syscall"
 	_ "unsafe"
 
-	F "github.com/khayyamov/sing/common/format"
+	F "github.com/sagernet/sing/common/format"
 )
 
 type Handler interface {

@@ -6,7 +6,7 @@ import (
 	"net"
 	"strings"
 
-	E "github.com/khayyamov/sing/common/exceptions"
+	E "github.com/sagernet/sing/common/exceptions"
 )
 
 func Contains(err error, msgList ...string) bool {
