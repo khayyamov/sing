@@ -3,9 +3,9 @@ package badjson
 import (
 	"bytes"
 
-	"github.com/sagernet/sing/common"
-	E "github.com/sagernet/sing/common/exceptions"
-	"github.com/sagernet/sing/common/json"
+	"github.com/khayyamov/sing/common"
+	E "github.com/khayyamov/sing/common/exceptions"
+	"github.com/khayyamov/sing/common/json"
 )
 
 type JSONArray []any

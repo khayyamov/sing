@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/sagernet/sing/common/atomic"
-	"github.com/sagernet/sing/common/x/list"
-	"github.com/sagernet/sing/service"
+	"github.com/khayyamov/sing/common/atomic"
+	"github.com/khayyamov/sing/common/x/list"
+	"github.com/khayyamov/sing/service"
 )
 
 type defaultManager struct {

@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"io"
 
-	"github.com/sagernet/sing/common"
+	"github.com/khayyamov/sing/common"
 )
 
 type stubByteReader struct {

@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/sagernet/sing/common"
-	E "github.com/sagernet/sing/common/exceptions"
+	"github.com/khayyamov/sing/common"
+	E "github.com/khayyamov/sing/common/exceptions"
 )
 
 func UnmarshalExtended[T any](content []byte) (T, error) {

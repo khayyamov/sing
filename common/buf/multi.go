@@ -1,6 +1,6 @@
 package buf
 
-import "github.com/sagernet/sing/common"
+import "github.com/khayyamov/sing/common"
 
 func LenMulti(buffers []*Buffer) int {
 	var n int

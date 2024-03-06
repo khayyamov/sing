@@ -1,9 +1,9 @@
 package linkedhashmap
 
 import (
-	"github.com/sagernet/sing/common"
-	"github.com/sagernet/sing/common/x/collections"
-	"github.com/sagernet/sing/common/x/list"
+	"github.com/khayyamov/sing/common"
+	"github.com/khayyamov/sing/common/x/collections"
+	"github.com/khayyamov/sing/common/x/list"
 )
 
 var _ collections.Map[string, any] = (*Map[string, any])(nil)

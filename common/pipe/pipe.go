@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	N "github.com/sagernet/sing/common/network"
+	N "github.com/khayyamov/sing/common/network"
 )
 
 // pipeDeadline is an abstraction for handling timeouts.

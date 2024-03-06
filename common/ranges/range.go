@@ -3,7 +3,7 @@ package ranges
 import (
 	"sort"
 
-	"github.com/sagernet/sing/common/x/constraints"
+	"github.com/khayyamov/sing/common/x/constraints"
 )
 
 type Range[N comparable] struct {

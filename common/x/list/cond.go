@@ -1,6 +1,6 @@
 package list
 
-import "github.com/sagernet/sing/common"
+import "github.com/khayyamov/sing/common"
 
 func (l List[T]) Size() int {
 	return l.len

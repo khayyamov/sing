@@ -9,8 +9,7 @@ import (
 	"io"
 	"strconv"
 
-	. "github.com/sagernet/sing/common/abx/internal"
-	E "github.com/sagernet/sing/common/exceptions"
+	E "github.com/khayyamov/sing/common/exceptions"
 )
 
 var _ xml.TokenReader = (*Reader)(nil)

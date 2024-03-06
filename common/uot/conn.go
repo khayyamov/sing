@@ -5,12 +5,12 @@ import (
 	"io"
 	"net"
 
-	"github.com/sagernet/sing/common"
-	"github.com/sagernet/sing/common/buf"
-	"github.com/sagernet/sing/common/bufio"
-	E "github.com/sagernet/sing/common/exceptions"
-	M "github.com/sagernet/sing/common/metadata"
-	N "github.com/sagernet/sing/common/network"
+	"github.com/khayyamov/sing/common"
+	"github.com/khayyamov/sing/common/buf"
+	"github.com/khayyamov/sing/common/bufio"
+	E "github.com/khayyamov/sing/common/exceptions"
+	M "github.com/khayyamov/sing/common/metadata"
+	N "github.com/khayyamov/sing/common/network"
 )
 
 var (

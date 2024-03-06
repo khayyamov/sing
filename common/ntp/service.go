@@ -5,11 +5,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/sagernet/sing/common"
-	E "github.com/sagernet/sing/common/exceptions"
-	"github.com/sagernet/sing/common/logger"
-	M "github.com/sagernet/sing/common/metadata"
-	N "github.com/sagernet/sing/common/network"
+	"github.com/khayyamov/sing/common"
+	E "github.com/khayyamov/sing/common/exceptions"
+	"github.com/khayyamov/sing/common/logger"
+	M "github.com/khayyamov/sing/common/metadata"
+	N "github.com/khayyamov/sing/common/network"
 )
 
 const TimeLayout = "2006-01-02 15:04:05 -0700"

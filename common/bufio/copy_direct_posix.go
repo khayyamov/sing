@@ -8,10 +8,10 @@ import (
 	"os"
 	"syscall"
 
-	"github.com/sagernet/sing/common/buf"
-	E "github.com/sagernet/sing/common/exceptions"
-	M "github.com/sagernet/sing/common/metadata"
-	N "github.com/sagernet/sing/common/network"
+	"github.com/khayyamov/sing/common/buf"
+	E "github.com/khayyamov/sing/common/exceptions"
+	M "github.com/khayyamov/sing/common/metadata"
+	N "github.com/khayyamov/sing/common/network"
 )
 
 var _ N.ReadWaiter = (*syscallReadWaiter)(nil)

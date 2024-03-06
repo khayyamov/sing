@@ -5,10 +5,10 @@ import (
 	"io"
 	"net/netip"
 
-	"github.com/sagernet/sing/common"
-	"github.com/sagernet/sing/common/buf"
-	E "github.com/sagernet/sing/common/exceptions"
-	"github.com/sagernet/sing/common/rw"
+	"github.com/khayyamov/sing/common"
+	"github.com/khayyamov/sing/common/buf"
+	E "github.com/khayyamov/sing/common/exceptions"
+	"github.com/khayyamov/sing/common/rw"
 )
 
 const (
