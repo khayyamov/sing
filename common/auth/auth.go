@@ -32,6 +32,14 @@ func (au *Authenticator) AddUserToAuthenticator(users []User) {
 	}
 }
 
+func (au *Authenticator) DeleteUserToAuthenticator(users []User) {
+	if len(users) > 0 {
+		for _, user := range users {
+			delete(au.userMap, user.Username)
+		}
+	}
+}
+
 func (au *Authenticator) Verify(username string, password string) bool {
 	passwordList, ok := au.userMap[username]
 	return ok && common.Contains(passwordList, password)
