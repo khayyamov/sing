@@ -2,7 +2,6 @@ name: Debug build
 
 on:
   push:
-
 jobs:
   build:
     name: Linux Debug build
