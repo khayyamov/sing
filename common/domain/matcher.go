@@ -2,11 +2,10 @@ package domain
 
 import (
 	"encoding/binary"
-	"io"
 	"sort"
 	"unicode/utf8"
 
-	"github.com/sagernet/sing/common/rw"
+	"github.com/sagernet/sing/common/varbin"
 )
 
 type Matcher struct {
@@ -39,43 +38,22 @@ func NewMatcher(domains []string, domainSuffix []string) *Matcher {
 	return &Matcher{newSuccinctSet(domainList)}
 }
 
-func ReadMatcher(reader io.Reader) (*Matcher, error) {
-	var version uint8
-	err := binary.Read(reader, binary.BigEndian, &version)
-	if err != nil {
-		return nil, err
-	}
-	leavesLength, err := rw.ReadUVariant(reader)
-	if err != nil {
-		return nil, err
-	}
-	leaves := make([]uint64, leavesLength)
-	err = binary.Read(reader, binary.BigEndian, leaves)
-	if err != nil {
-		return nil, err
-	}
-	labelBitmapLength, err := rw.ReadUVariant(reader)
-	if err != nil {
-		return nil, err
-	}
-	labelBitmap := make([]uint64, labelBitmapLength)
-	err = binary.Read(reader, binary.BigEndian, labelBitmap)
-	if err != nil {
-		return nil, err
-	}
-	labelsLength, err := rw.ReadUVariant(reader)
-	if err != nil {
-		return nil, err
-	}
-	labels := make([]byte, labelsLength)
-	_, err = io.ReadFull(reader, labels)
+type matcherData struct {
+	Version     uint8
+	Leaves      []uint64
+	LabelBitmap []uint64
+	Labels      []byte
+}
+
+func ReadMatcher(reader varbin.Reader) (*Matcher, error) {
+	matcher, err := varbin.ReadValue[matcherData](reader, binary.BigEndian)
 	if err != nil {
 		return nil, err
 	}
 	set := &succinctSet{
-		leaves:      leaves,
-		labelBitmap: labelBitmap,
-		labels:      labels,
+		leaves:      matcher.Leaves,
+		labelBitmap: matcher.LabelBitmap,
+		labels:      matcher.Labels,
 	}
 	set.init()
 	return &Matcher{set}, nil
@@ -85,36 +63,42 @@ func (m *Matcher) Match(domain string) bool {
 	return m.set.Has(reverseDomain(domain))
 }
 
-func (m *Matcher) Write(writer io.Writer) error {
-	err := binary.Write(writer, binary.BigEndian, byte(1))
-	if err != nil {
-		return err
+func (m *Matcher) Write(writer varbin.Writer) error {
+	return varbin.Write(writer, binary.BigEndian, matcherData{
+		Version:     1,
+		Leaves:      m.set.leaves,
+		LabelBitmap: m.set.labelBitmap,
+		Labels:      m.set.labels,
+	})
+}
+
+func (m *Matcher) Dump() (domainList []string, prefixList []string) {
+	domainMap := make(map[string]bool)
+	prefixMap := make(map[string]bool)
+	for _, key := range m.set.keys() {
+		key = reverseDomain(key)
+		if key[0] == prefixLabel {
+			prefixMap[key[1:]] = true
+		} else {
+			domainMap[key] = true
+		}
 	}
-	err = rw.WriteUVariant(writer, uint64(len(m.set.leaves)))
-	if err != nil {
-		return err
+	for rawPrefix := range prefixMap {
+		if rawPrefix[0] == '.' {
+			if rootDomain := rawPrefix[1:]; domainMap[rootDomain] {
+				delete(domainMap, rootDomain)
+				prefixList = append(prefixList, rootDomain)
+				continue
+			}
+		}
+		prefixList = append(prefixList, rawPrefix)
 	}
-	err = binary.Write(writer, binary.BigEndian, m.set.leaves)
-	if err != nil {
-		return err
+	for domain := range domainMap {
+		domainList = append(domainList, domain)
 	}
-	err = rw.WriteUVariant(writer, uint64(len(m.set.labelBitmap)))
-	if err != nil {
-		return err
-	}
-	err = binary.Write(writer, binary.BigEndian, m.set.labelBitmap)
-	if err != nil {
-		return err
-	}
-	err = rw.WriteUVariant(writer, uint64(len(m.set.labels)))
-	if err != nil {
-		return err
-	}
-	_, err = writer.Write(m.set.labels)
-	if err != nil {
-		return err
-	}
-	return nil
+	sort.Strings(domainList)
+	sort.Strings(prefixList)
+	return domainList, prefixList
 }
 
 func reverseDomain(domain string) string {

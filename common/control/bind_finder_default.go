@@ -6,8 +6,11 @@ import (
 	_ "unsafe"
 
 	"github.com/sagernet/sing/common"
+	E "github.com/sagernet/sing/common/exceptions"
 	M "github.com/sagernet/sing/common/metadata"
 )
+
+var _ InterfaceFinder = (*DefaultInterfaceFinder)(nil)
 
 type DefaultInterfaceFinder struct {
 	interfaces []Interface
@@ -29,10 +32,11 @@ func (f *DefaultInterfaceFinder) Update() error {
 			return err
 		}
 		interfaces = append(interfaces, Interface{
-			Index:     netIf.Index,
-			MTU:       netIf.MTU,
-			Name:      netIf.Name,
-			Addresses: common.Map(ifAddrs, M.PrefixFromNet),
+			Index:        netIf.Index,
+			MTU:          netIf.MTU,
+			Name:         netIf.Name,
+			Addresses:    common.Map(ifAddrs, M.PrefixFromNet),
+			HardwareAddr: netIf.HardwareAddr,
 		})
 	}
 	f.interfaces = interfaces
@@ -41,6 +45,10 @@ func (f *DefaultInterfaceFinder) Update() error {
 
 func (f *DefaultInterfaceFinder) UpdateInterfaces(interfaces []Interface) {
 	f.interfaces = interfaces
+}
+
+func (f *DefaultInterfaceFinder) Interfaces() []Interface {
+	return f.interfaces
 }
 
 func (f *DefaultInterfaceFinder) InterfaceIndexByName(name string) (int, error) {
@@ -71,9 +79,6 @@ func (f *DefaultInterfaceFinder) InterfaceNameByIndex(index int) (string, error)
 	return netInterface.Name, nil
 }
 
-//go:linkname errNoSuchInterface net.errNoSuchInterface
-var errNoSuchInterface error
-
 func (f *DefaultInterfaceFinder) InterfaceByAddr(addr netip.Addr) (*Interface, error) {
 	for _, netInterface := range f.interfaces {
 		for _, prefix := range netInterface.Addresses {
@@ -93,5 +98,5 @@ func (f *DefaultInterfaceFinder) InterfaceByAddr(addr netip.Addr) (*Interface, e
 			}
 		}
 	}
-	return nil, &net.OpError{Op: "route", Net: "ip+net", Source: nil, Addr: &net.IPAddr{IP: addr.AsSlice()}, Err: errNoSuchInterface}
+	return nil, &net.OpError{Op: "route", Net: "ip+net", Source: nil, Addr: &net.IPAddr{IP: addr.AsSlice()}, Err: E.New("no such network interface")}
 }
