@@ -7,7 +7,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/sagernet/sing/common/bufio"
 	E "github.com/sagernet/sing/common/exceptions"
 	M "github.com/sagernet/sing/common/metadata"
 	N "github.com/sagernet/sing/common/network"
@@ -148,8 +147,9 @@ func (c *Client) DialContext(ctx context.Context, network string, address M.Sock
 			tcpConn.Close()
 			return nil, err
 		}
-		return NewAssociatePacketConn(bufio.NewUnbindPacketConn(udpConn), address, tcpConn), nil
+		return NewAssociatePacketConn(udpConn, address, tcpConn), nil
 	}
+	_ = tcpConn.Close()
 	return nil, os.ErrInvalid
 }
 
@@ -182,5 +182,6 @@ func (c *Client) BindContext(ctx context.Context, address M.Socksaddr) (net.Conn
 		}
 		return tcpConn, nil
 	}
+	_ = tcpConn.Close()
 	return nil, os.ErrInvalid
 }
