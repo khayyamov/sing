@@ -98,6 +98,29 @@ func CalculateFrontHeadroom(writer any) int {
 	return headroom
 }
 
+func calculateReaderFrontHeadroom(reader any) int {
+	var headroom int
+	for {
+		if reader == nil {
+			break
+		}
+		if lazyRoom, isLazy := reader.(LazyHeadroom); isLazy && lazyRoom.LazyHeadroom() {
+			return DefaultHeadroom
+		}
+		if headroomWriter, needHeadroom := reader.(FrontHeadroom); needHeadroom {
+			headroom += headroomWriter.FrontHeadroom()
+		}
+		if upstreamWriter, hasUpstreamWriter := reader.(WithUpstreamReader); hasUpstreamWriter {
+			reader = upstreamWriter.UpstreamReader()
+		} else if upstream, hasUpstream := reader.(common.WithUpstream); hasUpstream {
+			reader = upstream.Upstream()
+		} else {
+			break
+		}
+	}
+	return headroom
+}
+
 func CalculateRearHeadroom(writer any) int {
 	var headroom int
 	for {
@@ -132,13 +155,15 @@ type WriterWithMTU interface {
 func CalculateMTU(reader any, writer any) int {
 	readerMTU := calculateReaderMTU(reader)
 	writerMTU := calculateWriterMTU(writer)
-	if readerMTU > writerMTU {
-		return readerMTU
-	}
-	if writerMTU > buf.BufferSize {
+	if readerMTU == 0 && writerMTU == 0 || readerMTU > buf.BufferSize || writerMTU > buf.BufferSize {
 		return 0
 	}
-	return writerMTU
+	readerHeadroom := calculateReaderFrontHeadroom(reader)
+	if readerMTU > writerMTU {
+		return readerMTU + readerHeadroom
+	} else {
+		return writerMTU + readerHeadroom
+	}
 }
 
 func calculateReaderMTU(reader any) int {

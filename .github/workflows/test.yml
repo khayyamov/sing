@@ -1,10 +1,22 @@
-name: Debug build
+name: test
 
 on:
   push:
+    branches:
+      - main
+      - dev
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+      - '!.github/workflows/debug.yml'
+  pull_request:
+    branches:
+      - main
+      - dev
+
 jobs:
   build:
-    name: Linux Debug build
+    name: Linux
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -12,55 +24,14 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: ^1.22
-      - name: Add cache to Go proxy
-        run: |
-          version=`git rev-parse HEAD`
-          mkdir build
-          pushd build
-          go mod init build
-          go get -v github.com/khayyamov/sing@$version
-          popd
-        continue-on-error: true
-      - name: Build
-        run: |
-          make test
-  build_go118:
-    name: Linux Debug build (Go 1.18)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: ~1.18
-        continue-on-error: true
-      - name: Build
-        run: |
-          make test
-  build_go119:
-    name: Linux Debug build (Go 1.19)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: ~1.19
-        continue-on-error: true
       - name: Build
         run: |
           make test
   build_go120:
-    name: Linux Debug build (Go 1.20)
+    name: Linux (Go 1.20)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -68,7 +39,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: ~1.20
         continue-on-error: true
@@ -76,7 +47,7 @@ jobs:
         run: |
           make test
   build_go121:
-    name: Linux Debug build (Go 1.21)
+    name: Linux (Go 1.21)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -84,15 +55,15 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: ~1.21
         continue-on-error: true
       - name: Build
         run: |
           make test
-  build__windows:
-    name: Windows Debug build
+  build_windows:
+    name: Windows
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -100,7 +71,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: ^1.22
         continue-on-error: true
@@ -108,7 +79,7 @@ jobs:
         run: |
           make test
   build_darwin:
-    name: macOS Debug build
+    name: macOS
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -116,7 +87,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: ^1.22
         continue-on-error: true
