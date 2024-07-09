@@ -71,6 +71,14 @@ func MapIndexed[T any, N any](arr []T, block func(index int, it T) N) []N {
 	return retArr
 }
 
+func MapIndexedString[T any, N any](arr []T, block func(index any, it T) N) []N {
+	retArr := make([]N, 0, len(arr))
+	for index := range arr {
+		retArr = append(retArr, block(index, arr[index]))
+	}
+	return retArr
+}
+
 func FlatMap[T any, N any](arr []T, block func(it T) []N) []N {
 	var retAddr []N
 	for _, item := range arr {
