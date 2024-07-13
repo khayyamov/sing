@@ -8,7 +8,7 @@ type User struct {
 }
 
 type Authenticator struct {
-	userMap map[string][]string
+	UserMap map[string][]string
 }
 
 func NewAuthenticator(users []User) *Authenticator {
@@ -16,10 +16,10 @@ func NewAuthenticator(users []User) *Authenticator {
 		return nil
 	}
 	au := &Authenticator{
-		userMap: make(map[string][]string),
+		UserMap: make(map[string][]string),
 	}
 	for _, user := range users {
-		au.userMap[user.Username] = append(au.userMap[user.Username], user.Password)
+		au.UserMap[user.Username] = append(au.UserMap[user.Username], user.Password)
 	}
 	return au
 }
@@ -27,7 +27,7 @@ func NewAuthenticator(users []User) *Authenticator {
 func (au *Authenticator) AddUserToAuthenticator(users []User) {
 	if len(users) > 0 {
 		for _, user := range users {
-			au.userMap[user.Username] = append(au.userMap[user.Username], user.Password)
+			au.UserMap[user.Username] = append(au.UserMap[user.Username], user.Password)
 		}
 	}
 }
@@ -35,12 +35,12 @@ func (au *Authenticator) AddUserToAuthenticator(users []User) {
 func (au *Authenticator) DeleteUserToAuthenticator(users []User) {
 	if len(users) > 0 {
 		for _, user := range users {
-			delete(au.userMap, user.Username)
+			delete(au.UserMap, user.Username)
 		}
 	}
 }
 
 func (au *Authenticator) Verify(username string, password string) bool {
-	passwordList, ok := au.userMap[username]
+	passwordList, ok := au.UserMap[username]
 	return ok && common.Contains(passwordList, password)
 }
